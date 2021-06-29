@@ -1,0 +1,36 @@
+.btn.btn-secondary {
+
+  outline: none;
+  width: 150px;
+  border-radius: 12px
+
+}
+
+button.icon-btn {
+
+  width: 75px;
+  height: 75px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  box-shadow: 2px 2px 5px 2px #52525250;
+  background-color: rgb(24, 78, 196);
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+
+}
+
+.fa-question {
+
+  color: white;
+
+}
+
+.active-link {
+
+  background-color: #1d3ea8;
+  color: #ffff;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.178);
+
+}

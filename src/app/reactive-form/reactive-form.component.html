@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-8 m-5 p-5 text-center scale-in-center" style="background-color: #F1F1F4; min-height: 550px; height: auto; align-items: center; border-radius: 20px;">
+      <h2>Reactive Form</h2>
+
+      <form [formGroup]="reactiveForm" [hidden]="success">
+        <div class="form-group">
+          <div style="display: flex; flex-direction: column">
+            <label for="name" class="text-start">Nome Completo</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Digite seu nome completo">
+
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; flex-direction: column">
+            <label for="email" class="text-start">Email</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="example@example.com">
+            <p  class="shake-horizontal invalid-input" *ngIf="email.touched && email.invalid"><strong>{{email.value}}</strong> não pode ser usado como email</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; flex-direction: column">
+            <label for="cpf" class="text-start">CPF</label>
+            <input type="text" class="form-control" formControlName="cpf" placeholder="000.000.000-00" mask="000.000.000-00">
+            <p class="shake-horizontal invalid-input"  *ngIf="cpf.touched && cpf.invalid"><strong>{{cpf.value}}</strong> não é um CPF válido</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; flex-direction: column">
+            <label for="cpf" class="text-start">Telefone</label>
+            <input type="text" class="form-control" formControlName="phone" placeholder="(XX) XXXXX-XXXX" mask="(00) 0 0000-0000">
+            <p class="shake-horizontal invalid-input"  *ngIf="phone.touched && phone.invalid">Preencha o telefone corretamente</p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary my-4 px-5" (click)="onSubmit()" [disabled]="reactiveForm.invalid" >Enviar!</button>
+
+        <div *ngIf="!success">{{reactiveForm.value | json}}</div>
+
+      </form>
+
+
+
+      <div class="col text-center" [hidden]="!success">
+        <h1 class="mt-5" routerLink="/reactive">Formulário enviado com sucesso!</h1>
+        <img src="assets/email-sent.svg" alt="email-icon" width="250px" height="250px" >
+      </div>
+
+    </div>
+  </div>
+</div>

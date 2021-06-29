@@ -1,0 +1,16 @@
+.form-group {
+
+  padding: 0 250px;
+  margin: 15px 0px;
+
+}
+
+:disabled {
+
+  outline: none;
+  border: none;
+  background-color: #5252521f;
+  color: #fff;
+  font-weight: bold;
+
+}

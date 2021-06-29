@@ -23,8 +23,8 @@ const maskConfig: Partial<IConfig> = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [],

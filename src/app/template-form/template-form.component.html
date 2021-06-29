@@ -1,7 +1,100 @@
+<div class="row px-2  m-0 scale-in-center" [hidden]="!help">
+  <div class="col-2 py-3 my-5" style="background-color: #b6acac40; box-shadow: 2px 5px 5px 1px #02020248; height: auto; width: 15%; position:fixed; border-radius:0px 15px 15px 0px">
+    <h5>Formulário Template Driven</h5>
+    <p>No formulário guiado por template, setamos o ngForm e os models através de variáveis locais no próprio HTML do componente, lidando apenas com a submissão do mesmo.</p>
+    <h6>Validações:</h6>
+    <ul>
+      <li>Required em todos os campos;</li>
+      <li>Validar CPF (minLenght:11);</li>
+      <li>Maskara nos campos de telefone e CPF para limitar caracteres;</li>
+      <li>Botão de envio desabilitado até validade do formulário;</li>
+      <li>Display em tempo real do valor do formulário em JSON;</li>
+    </ul>
+  </div>
+
+</div>
+
+<button class="icon-btn shake-horizontal" (click)="help = !help"><i class="fa-solid fa-question fa-lg"></i></button>
+
+
+
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="col-8 m-5 p-5 text-center scale-in-center" style="background-color: #F1F1F4; height: 550px; border-radius: 16px">
-      <h5>Template Form</h5>
+    <div class="col-8 m-5 p-5 text-center scale-in-center" style="background-color: #F1F1F4; min-height: 550px; height: auto; align-items: center; border-radius: 20px;">
+      <h2>Template Driven Form</h2>
+
+      <form #templateForm="ngForm" (ngSubmit)="onSubmit(templateForm)" [hidden]="success">
+        <div class="form-group">
+          <div style="display: flex; flex-direction: column">
+            <label for="name" class="text-start">Nome Completo</label>
+            <input
+              ngModel
+              required
+              value="name"
+              name="name"
+              type="text"
+              class="form-control"
+              placeholder="Digite seu nome completo">
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; flex-direction: column">
+            <label for="email" class="text-start">Email</label>
+            <input
+              ngModel
+              value="email"
+              name="email"
+              type="text"
+              class="form-control"
+              placeholder="example@example.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; flex-direction: column">
+            <label for="cpf" class="text-start">CPF</label>
+            <input
+              ngModel
+              required
+              [minlength]="11"
+              name="cpf"
+              type="text"
+              class="form-control"
+              placeholder="000.000.000-00"
+              mask="000.000.000-00">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; flex-direction: column">
+            <label for="phone" class="text-start">Telefone</label>
+            <input
+              ngModel
+              required
+              minlength="11"
+              name="phone"
+              type="text"
+              class="form-control"
+              placeholder="(XX) XXXXX-XXXX"
+              mask="(00) 0 0000-0000">
+          </div>
+        </div>
+
+        <button class="btn btn-primary my-4 px-5" type="submit" [disabled]="templateForm.invalid">Enviar!</button>
+
+        <div *ngIf="!success">{{templateForm.value | json}}</div>
+
+      </form>
+
+
+
+      <div class="col text-center" [hidden]="!success">
+        <h1 class="mt-5" routerLink="/reactive">Formulário enviado com sucesso!</h1>
+        <img src="assets/email-sent.svg" alt="email-icon" width="250px" height="250px" >
+      </div>
+
     </div>
   </div>
 </div>

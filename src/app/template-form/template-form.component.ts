@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemplateFormComponent implements OnInit {
 
-  constructor() { }
+  help = false;
+  success = false;
 
-  ngOnInit(): void {
+  constructor( ) { }
+
+  ngOnInit() {}
+
+
+  onSubmit(form) {
+
+    if(form.valid){
+
+      this.success = true;
+      console.log(form)
+
+    }
   }
 
 }

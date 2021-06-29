@@ -10,7 +10,7 @@ export class ReactiveFormComponent implements OnInit {
 
   reactiveForm: FormGroup;
 
-  loading = false;
+  help = false;
   success = false;
 
   contacts = []
@@ -52,7 +52,6 @@ export class ReactiveFormComponent implements OnInit {
     if(this.reactiveForm.valid){
 
       this.success = true;
-      this.contacts[0].name.push(this.reactiveForm.value.name)
       console.log(this.reactiveForm.value)
       console.log(this.contacts)
 

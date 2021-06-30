@@ -22,6 +22,8 @@ export class TemplateFormComponent implements OnInit {
       this.success = true;
       console.log(form)
 
+    } else {
+      window.alert("Preencher formulário corretamente!")
     }
   }
 

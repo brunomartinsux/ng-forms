@@ -8,19 +8,26 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements OnInit {
 
+
   private map: L.Map
   private centroid: L.LatLngExpression = [-26.32505,-48.83116]
 
-   greenIcon = L.icon({
-    iconUrl: 'leaf-green.png',
-    shadowUrl: 'leaf-shadow.png',
+   regIcon = L.icon({
+    iconUrl: 'assets/sign-marker.png',
 
-    iconSize:     [38, 95], // size of the icon
+    iconSize:     [38, 38], // size of the icon
     shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    iconAnchor:   [20, 20], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 })
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.initMap()
+  }
+
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -34,10 +41,10 @@ export class MapComponent implements OnInit {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     })
 
-    const jittery = Array(5).fill(this.centroid).map(
+    const jittery = Array(10).fill(this.centroid).map(
       x => [x[0] + (Math.random() - .5)/10, x[1] + (Math.random() - .5)/10 ]
     ).map(
-      x => L.marker(x as L.LatLngExpression)
+      x => L.marker(x as L.LatLngExpression, {icon: this.regIcon})
     ).forEach(
       x => x.addTo(this.map)
     );
@@ -47,10 +54,5 @@ export class MapComponent implements OnInit {
   }
 
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.initMap()
-  }
 
 }

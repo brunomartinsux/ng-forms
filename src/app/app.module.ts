@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { TemplateFormComponent } from './template-form/template-form.component';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { MapComponent } from './map/map.component'
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -18,7 +19,8 @@ const maskConfig: Partial<IConfig> = {
     AppComponent,
     HeaderComponent,
     ReactiveFormComponent,
-    TemplateFormComponent
+    TemplateFormComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

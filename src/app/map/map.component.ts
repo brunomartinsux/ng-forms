@@ -11,6 +11,7 @@ export class MapComponent implements OnInit {
 
   private map: L.Map
   private centroid: L.LatLngExpression = [-26.32505,-48.83116]
+  popup = L.popup();
 
    regIcon = L.icon({
     iconUrl: 'assets/sign-marker.png',
@@ -26,6 +27,9 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMap()
+
+
+
   }
 
 
@@ -41,7 +45,7 @@ export class MapComponent implements OnInit {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     })
 
-    const jittery = Array(10).fill(this.centroid).map(
+    const jittery = Array(5).fill(this.centroid).map(
       x => [x[0] + (Math.random() - .5)/10, x[1] + (Math.random() - .5)/10 ]
     ).map(
       x => L.marker(x as L.LatLngExpression, {icon: this.regIcon})
@@ -50,6 +54,18 @@ export class MapComponent implements OnInit {
     );
 
     tiles.addTo(this.map)
+
+   const onMapClick = e => {
+      this.popup
+          .setLatLng(e.latlng)
+          .setContent(e.latlng.toString())
+          .openOn(this.map);
+
+          L.marker(e.latlng, {icon: this.regIcon}).addTo(this.map)
+  }
+  this.map.on('click', onMapClick)
+
+
 
   }
 

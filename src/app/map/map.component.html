@@ -4,3 +4,13 @@
     </div>
   </div>
 </div>
+
+<button class="btn btn-secondary" *ngIf="polygon" (click)="polygon = !polygon ">
+  <i class="fa-regular fa-vector-polygon"></i>
+  Ant Path
+</button>
+
+<button class="btn btn-secondary" *ngIf="!polygon" (click)="polygon = !polygon " style="background-color: rgb(255, 0, 0)">
+  <i class="fa-solid fa-circle"></i>
+  Marker
+</button>

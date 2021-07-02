@@ -13,3 +13,13 @@
 #map {
   height: 100%;
 }
+
+.btn.btn-secondary {
+
+  position: fixed;
+  right: 25px;
+  top: 110px;
+  box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.521);
+  width: 150px;
+
+}

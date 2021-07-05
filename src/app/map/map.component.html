@@ -5,12 +5,12 @@
   </div>
 </div>
 
-<button class="btn btn-secondary" *ngIf="polygon" (click)="polygon = !polygon ">
+<button class="btn btn-secondary" (click)="polygon = true " style="background-color: rgb(59, 41, 100)">
   <i class="fa-regular fa-vector-polygon"></i>
   Ant Path
 </button>
 
-<button class="btn btn-secondary" *ngIf="!polygon" (click)="polygon = !polygon " style="background-color: rgb(255, 0, 0)">
+<button class="btn btn-secondary mt-5" (click)="polygon = false " style="background-color: rgb(255, 0, 0)">
   <i class="fa-solid fa-circle"></i>
   Marker
 </button>

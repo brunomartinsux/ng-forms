@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import { AntPath, antPath } from 'leaflet-ant-path'
 import * as GeoSearch from 'leaflet-geosearch';
@@ -13,8 +14,9 @@ export class MapComponent implements OnInit {
 
   private map: L.Map
   private centroid: L.LatLngExpression = [-26.32505,-48.83116]
-  popup = L.popup();
-  polygon = false;
+  popup = L.popup()
+  polygon = false
+  json;
 
   latlngs = [];
 
@@ -39,12 +41,34 @@ polyIcon = L.icon({
   popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 })
 
-  constructor() { }
+  constructor( private http: HttpClient ) { }
 
   ngOnInit(): void {
 
     this.initMap()
+    this.getJSON()
 
+  }
+
+
+  getJSON () {
+
+    this.http.get('assets/geojson-file.geojson').subscribe((json: any) => {
+      this.json = json;
+      console.log(this.json)
+      L.geoJSON(this.json).addTo(this.map).on('click', this.areaClick)
+
+    });
+  }
+
+   areaClick = e => {
+
+    console.log(e.propagatedFrom.feature.properties)
+
+    this.popup
+    .setLatLng(e.latlng)
+    .setContent(e.propagatedFrom.feature.properties.local_name + e.propagatedFrom.feature.properties.toString())
+    .openOn(this.map);
   }
 
 
@@ -55,21 +79,22 @@ polyIcon = L.icon({
     })
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
+      maxZoom: 19,
       minZoom: 5,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     })
 
     const onMapClick = e => {
-      if(this.polygon) {
-        this.latlngs.push(e.latlng)
-        L.marker(e.latlng, {icon: this.polyIcon}).addTo(this.map)
-        const options = { use: L.polyline, delay: 400, dashArray: [10,20], weight: 5, color: "#0000FF", pulseColor: "#FFFFFF" };
-        const path = antPath(this.latlngs, options);
-        path.addTo(this.map);
-      } else {
-        L.marker(e.latlng, {icon: this.regIcon, draggable: true}).addTo(this.map).on('click', onMapDblClick)
-      }
+      console.log('Desativei os Markadores')
+      // if(this.polygon) {
+      //   this.latlngs.push(e.latlng)
+      //   L.marker(e.latlng, {icon: this.polyIcon}).addTo(this.map)
+      //   const options = { use: L.polyline, delay: 800, dashArray: [20,20], weight: 5, color: "#0000FF", pulseColor: "#FFFFFF" };
+      //   const path = antPath(this.latlngs, options);
+      //   path.addTo(this.map);
+      // } else {
+      //   L.marker(e.latlng, {icon: this.regIcon, draggable: true}).addTo(this.map).on('click', onMapDblClick)
+      // }
     }
      const onMapDblClick = e => {
       this.popup
@@ -96,6 +121,11 @@ polyIcon = L.icon({
 
     });
 
+    const polygonDraw = e => {
+
+    }
+
+    L.geoJSON(this.json).addTo(this.map)
 
     this.map.addControl(search);
 
@@ -103,7 +133,10 @@ polyIcon = L.icon({
 
     this.map.on('click', onMapClick)
 
+    this.map.on('mousover', polygonDraw)
+
   }
+
 
 
 

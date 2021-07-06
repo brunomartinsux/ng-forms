@@ -46,3 +46,18 @@ button.icon-btn {
   color: white;
 
 }
+
+
+path.leaflet-interactive {
+
+  fill: transparent;
+  stroke: transparent;
+
+}
+
+path.leaflet-interactive:hover {
+
+  fill: #396bb8;
+  stroke: #3d84ee;
+
+}
